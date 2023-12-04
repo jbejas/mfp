@@ -1,5 +1,7 @@
+// Import the HtmlWebpackPlugin plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+// Export the webpack configuration
 module.exports = {
   module: {
     rules: [
