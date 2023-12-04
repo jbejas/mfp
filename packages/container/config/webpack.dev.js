@@ -2,6 +2,7 @@ const { merge } = require('webpack-merge')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 const commonConfig = require('./webpack.common')
 const packageJson = require('../package.json')
+const path = require('path')
 
 const devConfig = {
   mode: 'development',
@@ -10,6 +11,24 @@ const devConfig = {
     historyApiFallback: {
       index: 'index.html',
     },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          'postcss-loader'
+        ]
+      }
+    ]
   },
   plugins: [
     new ModuleFederationPlugin({
